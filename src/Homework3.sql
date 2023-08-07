@@ -1,7 +1,6 @@
 В рамках БД "онлайн-магазин" напишите след/запросы:
 Вывести ко-во заказов, которое компания Speedy Express доставила в Brazil
     SELECT COUNT(*) FROM Orders
-    JOIN OrderDetails ON Orders.OrderID=OrderDetails.OrderID
     JOIN Customers ON Orders.CustomerID=Customers.CustomerID
     JOIN Shippers ON Orders.ShipperID=Shippers.ShipperID
     WHERE Customers.Country="Brazil" AND Shippers.ShipperName="Speedy Express"
@@ -13,8 +12,7 @@
     WHERE Suppliers.Country="Germany"
 
 Вывести ко-во и сред/стоимость товаров из USA
-    SELECT OrderDetails.Quantity, AVG(Products.Price) FROM Products
-    JOIN OrderDetails ON OrderDetails.ProductID=Products.ProductID
+    SELECT Count(*), AVG(Products.Price) FROM Products
     JOIN Suppliers ON Products.SupplierID=Suppliers.SupplierID
     WHERE Suppliers.Country="USA"
 
@@ -25,7 +23,8 @@
     ORDER BY Products.Price ASC LIMIT 2
 
 Применить наценку в 15% ко всем товарам из категории 4
-    SELECT Price, Price * 1.15 AS Price_up15 FROM Products
+    UPDATE Products
+    SET Price=Price * 1.15
     WHERE CategoryID=4
 
 Доп.задача
